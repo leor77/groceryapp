@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+
+<head th:replace="fragments :: head"></head>
+<body>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<br>
+
+<h1 class="display-5">Order History</h1>
+
+<br>
+
+<div th:each="order : ${orders}">
+
+    <h5 class="display-5">
+        <span>Purchase Order #: </span>
+        <span th:text="${order.getOrderId()}"></span>
+    </h5>
+
+<h5 class="display-5">
+    <span>Purchase Date: </span>
+
+    <span class="display-5" th:text="${#dates.format(order.getDate(), 'MMMM-dd-yyyy hh:mm a')}"></span>
+</h5>
+
+    <table class="table">
+
+    <tr>
+        <th>Cheese</th>
+        <th>Price</th>
+    </tr>
+
+    <tr th:each="product : ${order.getProducts()}">
+        <th th:text="${product.getName()}"></th>
+        <th th:text="${product.getPrice()}"></th>
+    </tr>
+</table>
+
+<br>
+<h5 class="display-5">
+    <span>Order Total: $</span>
+    <span th:text="${order.getTotalPrice()}"></span>
+</h5>
+
+    <br>
+    <br>
+
+</div>
+
+<form method="get" action="/cheese/account">
+    <button type="submit" class="btn btn-primary">Go Back</button>
+</form>
+
+<br>
+
+</body>
+</html>

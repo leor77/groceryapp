@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+
+<head th:replace="fragments :: head"></head>
+<body>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<br>
+
+<h1>Account Information</h1>
+
+<table class="table">
+
+    <tr>
+        <th>Name</th>
+        <th>Account Balance</th>
+    </tr>
+
+    <tr>
+        <th th:text="${customer.getName()}"></th>
+    <th th:text="${customer.getAccountFunds()}"></th>
+    </tr>
+
+</table>
+
+<br>
+
+<form method="get" action="/cheese/orders">
+    <button type="submit" class="btn btn-info">View Order History</button>
+</form>
+<br>
+
+<!--<div class="form-group">-->
+    <!--<select class="custom-select">-->
+        <!--<option selected="">Add Funds</option>-->
+        <!--<option value="1">20</option>-->
+        <!--<option value="2">40</option>-->
+        <!--<option value="3">60</option>-->
+        <!--<option value="2">80</option>-->
+        <!--<option value="3">100</option>-->
+    <!--</select>-->
+<!--</div>-->
+
+<br>
+<br>
+
+<h1 class="display-5">Order Information</h1>
+
+<p th:unless="${cheeses} and ${cheeses.size()}">You have no items in your cart</p>
+
+<table class="table" th:if="${cheeses.size()}">
+    <tr>
+        <th>Item</th>
+        <th>Price</th>
+        <th>   </th>
+    </tr>
+
+    <tr th:each ="cheese : ${customer.getCheeses()}">
+        <th th:text="${cheese.getName()}"></th>
+        <th th:text="${cheese.getPrice()}"></th>
+        <th>
+
+            <form method="post" th:if="${cheeses.size()}">
+                <button type="submit" class="btn btn-success btn-sm" name = "cheeseId" th:value="${cheese.id}" th:id="${cheese.id}">
+                    Remove
+                </button>
+            </form>
+
+        </th>
+    </tr>
+</table>
+
+<h3 class="display-5" th:if="${cheeses.size()}">
+    <span>Order Total: $</span>
+    <span th:text="${total}"></span>
+</h3>
+
+<br>
+
+<form method="get" action="/cheese/checkout" th:if="${cheeses.size()}">
+    <button type="submit" class="btn btn-primary">Check Out</button>
+</form>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+
+<head th:replace="fragments :: head"></head>
+<body>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<br>
+
+<h1>Order Confirmation</h1>
+<br>
+
+<h3>Please confirm your order below</h3>
+
+<br>
+<br>
+
+<h1 class="display-5">Order Information</h1>
+<table class="table">
+    <tr>
+        <th>Cheese</th>
+        <th>Price</th>
+
+    </tr>
+
+    <tr th:each ="cheese : ${cheeses}">
+        <th th:text="${cheese.getName()}"></th>
+        <th th:text="${cheese.getPrice()}"></th>
+    </tr>
+</table>
+
+    <form method="get" action="/cheese/account">
+        <button type="submit" class="btn btn-success">Edit Order</button>
+    </form>
+    <br>
+    <br>
+
+<h3 class="display-5">
+    <span>Order Total: $</span>
+    <span th:text="${total}"></span>
+</h3>
+
+<br>
+
+<form method="post">
+    <button type="submit" class="btn btn-primary">Confirm Order</button>
+</form>

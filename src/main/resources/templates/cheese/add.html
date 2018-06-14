@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}">
+
+<head th:replace="fragments :: head"></head>
+<body>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<!--<h1 th:text="${title}" class="display-5">Enter Item to Add</h1>-->
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="mx-auto" style="width: 450px;">
+            <br>
+            <h1 class="display-5">Enter New Item</h1>
+
+            <br>
+            <br>
+
+    <form method="post" style="max-width:600px;" th:object="${cheese}">
+
+    <div class="form-group">
+        <label th:for="name">Name</label>
+        <input class="form-control" th:field="*{name}" />
+    </div>
+
+        <span th:errors="*{name}" class="error"></span>
+
+    <div class="form-group">
+        <label th:for="description">Description</label>
+        <input class="form-control" th:field="*{description}" />
+        <span th:errors="*{description}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label th:for="price">Price</label>
+        <input class="form-control" th:field="*{price}" />
+        <span th:errors="*{price}" class="error"></span>
+    </div>
+
+        <br>
+
+        <div class="form-group">
+            <label th:for="type">Select Category</label>
+            <select class="custom-select" th:field="*{type}">
+                <option th:each="cheeseType : ${cheeseTypes}"
+                        th:text="${cheeseType.name}"
+                        th:value="${cheeseType}">
+                </option>
+            </select>
+        </div>
+
+        <br>
+
+    <button type="submit" class="btn btn-primary">Add Item</button>
+
+</form>
+</div>
+    </div>
+</div>
+
+</body>
+</html>

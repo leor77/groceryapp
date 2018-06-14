@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/main_layout}" xmlns="http://www.w3.org/1999/html">
+
+<head th:replace="fragments :: head"></head>
+<body>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<div layout:fragment="content" class="container mySpace">
+    <div class="alert alert-danger">
+        <h2>Order not completed. Insufficient funds</h2>
+    </div>
+</div>
+
+<div class="container h-100 d-flex justify-content-center">
+    <form method="get" action="/cheese/account">
+        <button type="submit" class="btn btn-primary">Back to Accounts Page</button>
+    </form>
+</div>
+
+</body>
+</html>
